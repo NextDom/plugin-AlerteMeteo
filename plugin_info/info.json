@@ -1,0 +1,13 @@
+{
+  "id": "AlerteMeteo",
+  "name": "Alerte Météo",
+  "licence": "GPL",
+  "require": "3.0",
+  "version": "1.0",
+  "category": "weather",
+  "hasDependency": false,
+  "hasOwnDaemon": false,
+  "maxDependancyInstallTime": 0,
+  "documentation": "https://nextdom.github.io/plugin-AlerteMeteo/#language#/",
+  "changelog": "https://nextdom.github.io/plugin-AlerteMeteo/#language#/changelog"
+}
