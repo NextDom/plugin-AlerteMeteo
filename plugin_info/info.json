@@ -3,7 +3,7 @@
   "name": "Alerte Météo",
   "licence": "GPL",
   "require": "3.0",
-  "version": "1.0",
+  "version": "0.0.0a",
   "category": "weather",
   "hasDependency": false,
   "hasOwnDaemon": false,
