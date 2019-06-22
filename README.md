@@ -1,17 +1,14 @@
-# Présentation:
+# Plugin Météo France
+
+## Présentation
 
 Alerte Météo permet de ré-afficher les données de Météo France.
 
 Celui-ci a été créé d'abord pour la météo de l'île de la Réunion. Les autres implémentations viendront par la suite.
 
-**Attention :** Ce plugin n'est *en aucun cas un plugin officiel de Météo France* et ne fait que profiter des flux d'informations récupérables.
+***Note** : Il s'agit d'un plugin sans lien officiel avec Météo France ou Météo France Réunion. Celui-ci ne fait que récupérer les informations de leur site pour ré-affichage.*
 
-# Documentation du plugin:
-
-[![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](docs/fr_FR/presentation.md)
+## Documentations liées au plugin
 
 - [Changelog](docs/fr_FR/changelog.md)
-
-# Documentation complète:
-
-[![Read the Docs](plugin_info/MiFlora_icon.png)](https://NextDom.github.io/plugin-MiFlora)
+- [Origines des informations](docs/fr_FR/infos_meteofrance.md)
