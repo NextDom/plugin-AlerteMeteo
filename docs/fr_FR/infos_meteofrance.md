@@ -4,12 +4,15 @@ Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-en
 
 ### Informations textuelles :
 
-#### Données prévisionnelles globales
+#### Données prévisionnelles globales des départements d'Outre-Mer
 
-- URL : `http://www.meteofrance.re/mf3-rpc-portlet/rest/carte/reunion/DEPT_FRANCE/DEPT974?echeance=#date#&nightMode=#night#`
-- Remarque : il n'est pas possible de récupérer directement les données par requête javascript à moins d'écrire les entêtes CORS ou de passer par [cors-anywhere](https://cors-anywhere.herokuapp.com/)
+- URL : `http://www.meteofrance.re/mf3-rpc-portlet/rest/carte/reunion/DEPT_FRANCE/DEPT#departement#?echeance=#date#&nightMode=#night#`
+- Remarques :
+  - il n'est pas possible de récupérer directement les données par requête javascript à moins d'écrire les entêtes CORS ou de passer par [cors-anywhere](https://cors-anywhere.herokuapp.com/) ou sinon faire directement du CURL
+  - l'extension du site (.re, .yt, etc) importe peu c'est le numéro de département qui détermine le contenu des données
 - Format des données : JSON
 - Paramètres :
+  - `#departement#` : numéro de département (exemple : `974` pour la Réunion).
   - `#date#` : détermine la date des prévisions à récupérer au format `aaaammjjhhmm`. On peut aller jusqu'à J+5 pour les prévisions.
     Les heures et minutes déterminent la période de la journée :
     - `0600` : matin
@@ -17,21 +20,87 @@ Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-en
     - `0000` : nuit, dans ce cas, il faut avancer la date d'un jour pour correspondre à minuit (exemple: les prévisions pour la nuit du 07/06/2019 devront être datées par 201906***08**0000*)
   - `#night#` : détermine si les descriptifs textuels récupérés devront être adaptés au contexte de la nuit. Les valeurs (chaîne de caractères) possibles sont `true` ou `false`
 
-#### Données prévisionnelles d'une station
+#### Données prévisionnelles d'une station (valable pour la France métropolitaine et les Outre-Mer)
 
 - URL : `http://ws.meteofrance.com/ws/getDetail/domtom/#station#.json`
 - Format des données : JSON
 - Paramètre :
   - `#station#` : numéro de la station à cibler. Ce numéro peut être récupéré de la prévision globale `previsionLieux.prevision.lieu.id`
 
-#### Données sur les vigilances
+#### Données sur les vigilances de la Réunion
 
 - URL: `http://www.meteofrance.re/vigilance-reunion/#zone#`
 - Format: HTML à extraire
 - Paramètre :
-  - `#zone#` : identifiant numérique de la zone allant de 1 à 12 en commençant par les terres intérieurs. (cf. `meteoRE._zones` dans `core/class/meteoRE.class.php` pour les correspondances)
+  - `#zone#` : identifiant numérique de la zone allant de 1 à 12 en commençant par les terres intérieurs.
+  
+    ```php
 
-#### Données sur les normales annuelles climatologiques sur une station
+    private $_zones = [
+        array (
+            'id' => 1,
+            'zone' => 'Nord',
+            'description' => 'Saint-Denis, Sainte-Marie'
+        ),
+        array (
+            'id' => 2,
+            'zone' => 'Est',
+            'description' => 'Sainte-Suzanne, Saint-André, Salazie, Bras Panon, Saint-Benoît, Plaine des Palmistes, Sainte-Rose'
+        ),
+        array (
+            'id' => 3,
+            'zone' => 'Sud-Est',
+            'description' => 'Saint-Joseph, Saint-Philippe'
+        ),
+        array (
+            'id' => 4,
+            'zone' => 'Sud',
+            'description' => 'Petite-île, Saint-Pierre, Le Tampon, L\'Entre-Deux, Saint-Louis, Cilaos, L\'Etang-Salé, Les Avirons'
+        ),
+        array (
+            'id' => 5,
+            'zone' => 'Ouest',
+            'description' => 'Saint-Leu, Trois Bassins, Saint-Paul, Le Port, La Possession'
+        ),
+        array (
+            'id' => 6,
+            'zone' => 'Zone côtière',
+            'description' => 'De Champ Borne au Cap Bernard'
+        ),
+        array (
+            'id' => 7,
+            'zone' => 'Zone côtière',
+            'description' => 'De la Pointe des Cascades à Champ Borne'
+        ),
+        array (
+            'id' => 8,
+            'zone' => 'Zone côtière',
+            'description' => 'De La Pointe de la Table à La Pointe des Cascades'
+        ),
+        array (
+            'id' => 9,
+            'zone' => 'Zone côtière',
+            'description' => 'De La Pointe au Sel à La Pointe de la Table'
+        ),
+        array (
+            'id' => 10,
+            'zone' => 'Zone côtière',
+            'description' => 'De La Pointe des Aigrettes à La Pointe au Sel'
+        ),
+        array (
+            'id' => 11,
+            'zone' => 'Zone côtière',
+            'description' => 'De La Pointe des Galets à La Pointe des Aigrettes'
+        ),
+        array (
+            'id' => 12,
+            'zone' => 'Zone côtière',
+            'description' => 'Du Cap Bernard à La Pointe des Galets'
+        )
+    ];
+    ```
+
+#### Données sur les normales annuelles climatologiques sur une station (Outre-Mer)
 
 - URL : `http://www.meteofrance.re/mf3-rpc-portlet/rest/climat/NORMALES/ANNUELLE/#station#/STATION_CLIM_FR?echeance=#currentyear#`
 - Format des données : JSON
@@ -41,17 +110,23 @@ Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-en
 
 ### Cartes disponibles
 
-#### Carte de l'île
+#### Départements
+
+##### La Réunion
 
 - URL : `http://www.meteofrance.re/mf3-re-theme/images/contents/meteo/cartessvg/large/DEPT974.svg`
 - Format de l'image : SVG
 
-#### Cyclo-genèse
+#### Cyclo-genèse (Outre-Mer)
 
-- URL : `http://files.meteofrance.com/files/reunion/cyclogenese/cyclogenese.png`
+- URL : `http://files.meteofrance.com/files/#departement#/cyclogenese/cyclogenese.png`
+- Paramètre :
+  - `#departement#` : nom textuel du département (exemple : `reunion` pour la Réunion).
 - Format de l'image : PNG
 
-#### Activités cycloniques
+#### Activités cycloniques (Outre-Mer)
 
-- URL : `http://www.meteofrance.re/mf3-re-theme/images/cyclones/carte/DEPT974-CYCLONE.png`
+- URL : `http://www.meteofrance.re/mf3-re-theme/images/cyclones/carte/DEPT#departement#-CYCLONE.png`
+- Paramètre :
+  - `#departement#` : numéro de département (exemple : `974` pour la Réunion).
 - Format de l'image : PNG
