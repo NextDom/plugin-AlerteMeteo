@@ -1,4 +1,4 @@
-*# Changelog
+# Changelog
 
 ## Guide des numéros de versions
 
