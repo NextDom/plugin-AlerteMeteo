@@ -1,8 +1,8 @@
-# Plugin Météo France
+# Plugin Alerte Météo
 
 ## Présentation
 
-Alerte Météo permet de ré-afficher les données de Météo France.
+**Alerte Météo** permet de ré-afficher les données de Météo France.
 
 Celui-ci a été créé d'abord pour la météo de l'île de la Réunion. Les autres implémentations viendront par la suite.
 
