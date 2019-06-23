@@ -6,22 +6,6 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 
 ### Informations textuelles :
 
-#### Données prévisionnelles globales des départements d'Outre-Mer
-
-- URL : `http://www.meteofrance.re/mf3-rpc-portlet/rest/carte/reunion/DEPT_FRANCE/DEPT#departement#?echeance=#date#&nightMode=#night#`
-- Remarques :
-  - il n'est pas possible de récupérer directement les données par requête javascript à moins d'écrire les entêtes CORS ou de passer par [cors-anywhere](https://cors-anywhere.herokuapp.com/) ou sinon faire directement du CURL
-  - l'extension du site (.re, .yt, etc) importe peu c'est le numéro de département qui détermine le contenu des données
-- Format des données : JSON
-- Paramètres :
-  - `#departement#` : numéro de département (exemple : `974` pour la Réunion).
-  - `#date#` : détermine la date des prévisions à récupérer au format `aaaammjjhhmm`. On peut aller jusqu'à J+5 pour les prévisions.
-    Les heures et minutes déterminent la période de la journée :
-    - `0600` : matin
-    - `1200` : après-midi
-    - `0000` : nuit, dans ce cas, il faut avancer la date d'un jour pour correspondre à minuit (exemple: les prévisions pour la nuit du 07/06/2019 devront être datées par 201906***08**0000*)
-  - `#night#` : détermine si les descriptifs textuels récupérés devront être adaptés au contexte de la nuit. Les valeurs (chaîne de caractères) possibles sont `true` ou `false`
-
 #### Données prévisionnelles de la France métropolitaine
 
 - URL : `http://ws.meteofrance.com/ws/getCarte/france/code/PAYS007/taille/569x533/jour/#jour#.json`
@@ -52,6 +36,22 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 - Paramètres :
   - `#type#` : `domtom` ou `france` détermine quelle type de territoire il s'agit
   - `#station#` : numéro de la station à cibler (récupérable à partir des prévisions d'une région : `result.previsions.ville.indicatif`)
+
+#### Données prévisionnelles globales des départements d'Outre-Mer
+
+- URL : `http://www.meteofrance.re/mf3-rpc-portlet/rest/carte/reunion/DEPT_FRANCE/DEPT#departement#?echeance=#date#&nightMode=#night#`
+- Remarques :
+  - il n'est pas possible de récupérer directement les données par requête javascript à moins d'écrire les entêtes CORS ou de passer par [cors-anywhere](https://cors-anywhere.herokuapp.com/) ou sinon faire directement du CURL
+  - l'extension du site (.re, .yt, etc) importe peu c'est le numéro de département qui détermine le contenu des données
+- Format des données : JSON
+- Paramètres :
+  - `#departement#` : numéro de département (exemple : `974` pour la Réunion).
+  - `#date#` : détermine la date des prévisions à récupérer au format `aaaammjjhhmm`. On peut aller jusqu'à J+5 pour les prévisions.
+    Les heures et minutes déterminent la période de la journée :
+    - `0600` : matin
+    - `1200` : après-midi
+    - `0000` : nuit, dans ce cas, il faut avancer la date d'un jour pour correspondre à minuit (exemple: les prévisions pour la nuit du 07/06/2019 devront être datées par 201906***08**0000*)
+  - `#night#` : détermine si les descriptifs textuels récupérés devront être adaptés au contexte de la nuit. Les valeurs (chaîne de caractères) possibles sont `true` ou `false`
 
 #### Données sur les vigilances de la Réunion
 
@@ -135,9 +135,7 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 
 ### Cartes disponibles
 
-#### Départements
-
-##### La Réunion
+#### FOnd de carte de département d'Outre-Mer
 
 - URL : `http://www.meteofrance.re/mf3-re-theme/images/contents/meteo/cartessvg/large/#departement#.svg`
 - Format de l'image : SVG
