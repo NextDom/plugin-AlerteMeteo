@@ -1,6 +1,8 @@
 # Origines des informations
 
-Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-engineering du site de [Météo France Réunion](http://www.meteofrance.re) et de la partie concernant la réunion sur la version mobile du site [WS Météo France](http://ws.meteofrance.com/home#!domtom_DEPT974) et n'a bénéficié d'aucune documentation officielle. De ce fait, la façon d'extraire les informations pourrait être inexacte et ne pourront servir de références pour d'autres développement.
+Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-engineering du site de [Météo France Réunion](http://www.meteofrance.re) et de la partie concernant la réunion sur la version mobile du site [WS Météo France](http://ws.meteofrance.com/home#!domtom_DEPT974) et n'a bénéficié d'aucune documentation officielle. 
+
+De ce fait, la façon d'extraire les informations pourrait être inexacte et ne pourront servir de références pour d'autres développement.
 
 ### Informations textuelles :
 
@@ -35,7 +37,6 @@ Toutes les ressources utilisées par le plugin résultent d'un rapide reverse-en
   - `#zone#` : identifiant numérique de la zone allant de 1 à 12 en commençant par les terres intérieurs.
   
     ```php
-
     private $_zones = [
         array (
             'id' => 1,
