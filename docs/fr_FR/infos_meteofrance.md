@@ -135,7 +135,7 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 
 ### Cartes disponibles
 
-#### FOnd de carte de département d'Outre-Mer
+#### Fond de carte de département d'Outre-Mer
 
 - URL : `http://www.meteofrance.re/mf3-re-theme/images/contents/meteo/cartessvg/large/#departement#.svg`
 - Format de l'image : SVG
