@@ -17,7 +17,14 @@ L'absence d'indicateur de stabilité correspond à une version stable.
 ### Etudes de l'existant
 
 - [ ] Extraction des données de [ws.meteofrance.com](http://ws.meteofrance.com)
+  - [x] Listes des régions
+  - [x] Listes des départements
+  - [x] Listes des villes/stations
+  - [ ] Listes des vigilances
 - [ ] Extraction des données de [meteofrance.re](http://www.meteofrance.re/)
+  - [x] Listes des vigilances
+  - [ ] Alertes cycloniques
+  - [ ] Informations de cyclogénèse
 
 ### Backend
 
@@ -42,7 +49,9 @@ L'absence d'indicateur de stabilité correspond à une version stable.
 
 ### v0.0.1a - 23.06.2019
 
-- Initialisation de la classe ressource pour manipuler les ressources distantes
+- Initialisation de la classe AlerteMeteoArea pour manipuler les zones géographiques
+- Initialisation de la classe AlerteMeteoForecast pour manipuler les prévisions météorologiques
+- Initialisation de la classe AlerteMeteoResource pour manipuler les ressources distantes
 - Documentation technique ([ressources distantes](./infos_meteofrance.md))
 - Icône de plugin
 
