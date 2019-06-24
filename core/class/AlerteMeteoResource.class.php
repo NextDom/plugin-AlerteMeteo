@@ -10,7 +10,7 @@
 require_once dirname(__FILE__) . '/../../../../core/class/AlerteMeteoArea.class.php';
 require_once dirname(__FILE__) . '/../../../../core/class/AlerteMeteoForecast.class.php';
 
-class AlerteMeteoResources
+class AlerteMeteoResource
 {
     /**
      * URLs utilisées pour récupérer les ressources distantes
