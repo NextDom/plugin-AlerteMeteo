@@ -28,7 +28,7 @@ sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
 <div class="row row-overflow">
-    <!-- Menu d'actions -->
+    <!-- Sidebar -->
     <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
@@ -47,6 +47,286 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 }
                 ?>
             </ul>
+        </div>
+    </div>
+    <!-- Elements -->
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+        <legend><i class="fa fa-cog"></i> {{Gestion}}</legend>
+        <div class="eqLogicThumbnailContainer">
+            <div class="eqLogicAction cursor" data-action="add" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+                <i class="fa fa-plus-circle" style="font-size : 6em;color:#33b8cc;"></i>
+                <br>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#33b8cc">{{Ajouter}}</span>
+            </div>
+            <div class="eqLogicAction cursor" data-action="gotoPluginConf" style="text-align: center; background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
+                <i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i>
+                <br>
+                <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676">{{Configuration}}</span>
+            </div>
+        </div>
+        <br>
+        <div id="objectList" class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Mes conditions externes}} </a>
+                        <span class="badge">
+                            <?php
+                            $objectNumber = 0;
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'externalConditions') {
+                                    ++$objectNumber;
+                                }
+                            }
+                            echo $objectNumber;
+                            ?>
+                        </span>
+                    </h4>
+                </div>
+                <div id="externalInfoObjectList" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="eqLogicThumbnailContainer">
+                            <?php
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'externalConditions') {
+                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                    echo '<img src="plugins/shutters/resources/images/externalConditions.png" height="100" width="100" />';
+                                    echo "<br>";
+                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                    echo '</div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#heliotropeZoneObjectList"> {{Mes zones héliotrope}} </a>
+                        <span class="badge">
+                            <?php
+                            $objectNumber = 0;
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'heliotropeZone') {
+                                    ++$objectNumber;
+                                }
+                            }
+                            echo $objectNumber;
+                            ?>
+                        </span>
+                    </h4>
+                </div>
+                <div id="heliotropeZoneObjectList" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="eqLogicThumbnailContainer">
+                            <?php
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'heliotropeZone') {
+                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                    echo '<img src="plugins/shutters/resources/images/heliotropeZone.png" height="100" width="100" />';
+                                    echo "<br>";
+                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                    $externalInfoObject = $eqLogic->getConfiguration('externalInfoObject');
+                                    if ($externalInfoObject != null && $externalInfoObject != 'none') {
+                                        echo '<span><i class="fas fa-link">' . eqLogic::byId($externalInfoObject)->getName() . '</i></span>';
+                                    }
+                                    echo '</div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#shuttersGroupObjectList"> {{Mes groupes de volets}} </a>
+                        <span class="badge">
+                            <?php
+                            $objectNumber = 0;
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'shuttersGroup') {
+                                    ++$objectNumber;
+                                }
+                            }
+                            echo $objectNumber;
+                            ?>
+                        </span>
+                    </h4>
+                </div>
+                <div id="shuttersGroupObjectList" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="eqLogicThumbnailContainer">
+                            <?php
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'shuttersGroup') {
+                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                    echo '<img src="plugins/shutters/resources/images/shuttersGroup.png" height="100" width="100" />';
+                                    echo "<br>";
+                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                    echo '</div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#shutterObjectList"> {{Mes volets}} </a>
+                        <span class="badge">
+                            <?php
+                            $objectNumber = 0;
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'shutter') {
+                                    ++$objectNumber;
+                                }
+                            }
+                            echo $objectNumber;
+                            ?>
+                        </span>
+                    </h4>
+                </div>
+                <div id="shutterObjectList" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="eqLogicThumbnailContainer">
+                            <?php
+                            foreach ($eqLogics as $eqLogic) {
+                                if ($eqLogic->getConfiguration('eqType') == 'shutter') {
+                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                    echo '<img src="plugins/shutters/resources/images/shutter.png" height="100" width="100" />';
+                                    echo "<br>";
+                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                    echo '</div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+        <a class="btn btn-success eqLogicAction pull-right" data-action="save">
+            <i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+        <a class="btn btn-danger eqLogicAction pull-right" data-action="remove">
+            <i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+        <a class="btn btn-default eqLogicAction pull-right" data-action="configure">
+            <i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation">
+                <a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay">
+                    <i class="fa fa-arrow-circle-left"></i>
+                </a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="#eqLogicTab" aria-controls="home" role="tab" data-toggle="tab">
+                    <i class="fa fa-microchip"></i> {{Equipement}}</a>
+            </li>
+            <li role="presentation">
+                <a href="#settingsTab" aria-controls="profile" role="tab" data-toggle="tab">
+                    <i class="fa fa-wrench"></i> {{Paramètres}}</a>
+            </li>
+            <li role="presentation">
+                <a href="#commandTab" aria-controls="avatar" role="tab" data-toggle="tab">
+                    <i class="fa fa-list-alt"></i> {{Commandes}}</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
+            <div role="tabpanel" class="tab-pane active" id="eqLogicTab">
+                <br />
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">{{Définition de l'équipement}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="objectName">{{Nom de l'équipement}}</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="eqLogicAttr form-control display-none" data-l1key="id" />
+                                            <input id="objectName" type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="sel_object">{{Objet parent}}</label>
+                                        <div class="col-sm-5">
+                                            <select id="sel_object" class="eqLogicAttr form-control cursor" data-l1key="object_id">
+                                                <option value="">{{Aucun}}</option>
+                                                <?php
+                                                foreach (object::all() as $object) {
+                                                    echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{Catégorie}}</label>
+                                        <div class="col-sm-9">
+                                            <?php
+                                            foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
+                                                echo '<label class="checkbox-inline">';
+                                                echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
+                                                echo '</label>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">{{Equipement}}</label>
+                                        <div class="col-sm-5">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked />{{Visible}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="eqType">{{Type d'équipement}}</label>
+                                        <div class="col-sm-5">
+                                            <select id="eqType" class="eqLogicAttr form-control cursor" data-l1key="configuration" data-l2key="eqType">
+                                                <option value="externalConditions">{{Conditions externes}}</option>
+                                                <option value="heliotropeZone">{{Zone héliotrope}}</option>
+                                                <option value="shuttersGroup">{{Groupe de volets}}</option>
+                                                <option value="shutter">{{Volet}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="comment">{{Commentaire}}</label>
+                                        <div class="col-sm-5">
+                                            <textarea id="comment" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="settingsTab">
+                <br />
+                <div id="settingsPanels"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="commandTab">
+                <br />
+                <div id="commandsPanels"></div>
+            </div>
         </div>
     </div>
 </div>
