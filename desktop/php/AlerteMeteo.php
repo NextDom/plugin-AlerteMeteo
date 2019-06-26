@@ -70,18 +70,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#forecastObjectList"> {{Prévisions}}</a>
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'forecast') {
-                                    ++$objectNumber;
+                        <a data-toggle="collapse" data-parent="#objectList" href="#forecastObjectList">
+                            {{Prévisions}}
+                            <span class="badge">
+                                <?php
+                                $objectNumber = 0;
+                                foreach ($eqLogics as $eqLogic) {
+                                    if ($eqLogic->getConfiguration('eqType') == 'forecast') {
+                                        ++$objectNumber;
+                                    }
                                 }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
+                                echo $objectNumber;
+                                ?>
+                            </span>
+                        </a>
+                        
                     </h4>
                 </div>
                 <div id="forecastObjectList" class="panel-collapse collapse in">
@@ -106,19 +109,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <!-- Vigilances -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-parent="#objectList" href="#alertObjectList">
-                        {{Vigilances}}
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'alert') {
-                                    ++$objectNumber;
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#alertObjectList">
+                            {{Vigilances}}
+                            <span class="badge">
+                                <?php
+                                $objectNumber = 0;
+                                foreach ($eqLogics as $eqLogic) {
+                                    if ($eqLogic->getConfiguration('eqType') == 'alert') {
+                                        ++$objectNumber;
+                                    }
                                 }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
+                                echo $objectNumber;
+                                ?>
+                            </span>
+                        </a>
                     </h4>
                 </div>
                 <div id="alertObjectList" class="panel-collapse collapse">
@@ -144,18 +149,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#hurricaneObjectList"> {{Alertes cycloniques}}</a>
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'hurricane') {
-                                    ++$objectNumber;
+                        <a data-toggle="collapse" data-parent="#objectList" href="#hurricaneObjectList">
+                            {{Alertes cycloniques}}
+                            <span class="badge">
+                                <?php
+                                $objectNumber = 0;
+                                foreach ($eqLogics as $eqLogic) {
+                                    if ($eqLogic->getConfiguration('eqType') == 'hurricane') {
+                                        ++$objectNumber;
+                                    }
                                 }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
+                                echo $objectNumber;
+                                ?>
+                            </span>
+                        </a>
                     </h4>
                 </div>
                 <div id="hurricaneObjectList" class="panel-collapse collapse">
@@ -293,6 +300,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
     </div>
 </div>
 <?php
+include_file('desktop', 'AlerteMeteo', 'css', 'Base');
 include_file('desktop', 'AlerteMeteo', 'css', 'AlerteMeteo');
 include_file('desktop', 'AlerteMeteo', 'js', 'AlerteMeteo');
 include_file('core', 'plugin.template', 'js');
