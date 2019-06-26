@@ -1,19 +1,19 @@
 <?php
 
-/* This file is part of Jeedom.
+/* This file is part of NextDom.
  *
- * Jeedom is free software: you can redistribute it and/or modify
+ * NextDom is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Jeedom is distributed in the hope that it will be useful,
+ * NextDom is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+ * along with NextDom. If not, see <http://www.gnu.org/licenses/>.
  */
 
 
@@ -69,7 +69,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Mes conditions externes}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Mes surveillances météorologiques}} </a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -102,118 +102,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#heliotropeZoneObjectList"> {{Mes zones héliotrope}} </a>
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'heliotropeZone') {
-                                    ++$objectNumber;
-                                }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
-                    </h4>
-                </div>
-                <div id="heliotropeZoneObjectList" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="eqLogicThumbnailContainer">
-                            <?php
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'heliotropeZone') {
-                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                                    echo '<img src="plugins/shutters/resources/images/heliotropeZone.png" height="100" width="100" />';
-                                    echo "<br>";
-                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
-                                    $externalInfoObject = $eqLogic->getConfiguration('externalInfoObject');
-                                    if ($externalInfoObject != null && $externalInfoObject != 'none') {
-                                        echo '<span><i class="fas fa-link">' . eqLogic::byId($externalInfoObject)->getName() . '</i></span>';
-                                    }
-                                    echo '</div>';
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#shuttersGroupObjectList"> {{Mes groupes de volets}} </a>
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'shuttersGroup') {
-                                    ++$objectNumber;
-                                }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
-                    </h4>
-                </div>
-                <div id="shuttersGroupObjectList" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="eqLogicThumbnailContainer">
-                            <?php
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'shuttersGroup') {
-                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                                    echo '<img src="plugins/shutters/resources/images/shuttersGroup.png" height="100" width="100" />';
-                                    echo "<br>";
-                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
-                                    echo '</div>';
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#shutterObjectList"> {{Mes volets}} </a>
-                        <span class="badge">
-                            <?php
-                            $objectNumber = 0;
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'shutter') {
-                                    ++$objectNumber;
-                                }
-                            }
-                            echo $objectNumber;
-                            ?>
-                        </span>
-                    </h4>
-                </div>
-                <div id="shutterObjectList" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="eqLogicThumbnailContainer">
-                            <?php
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == 'shutter') {
-                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                                    echo '<img src="plugins/shutters/resources/images/shutter.png" height="100" width="100" />';
-                                    echo "<br>";
-                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
-                                    echo '</div>';
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -231,7 +119,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             </li>
             <li role="presentation" class="active">
                 <a href="#eqLogicTab" aria-controls="home" role="tab" data-toggle="tab">
-                    <i class="fa fa-microchip"></i> {{Equipement}}</a>
+                    <i class="fa fa-microchip"></i> {{Surveillance}}</a>
             </li>
             <li role="presentation">
                 <a href="#settingsTab" aria-controls="profile" role="tab" data-toggle="tab">
@@ -248,16 +136,16 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title">{{Définition de l'équipement}}</h4>
+                            <h4 class="panel-title">{{Définition de la surveillance}}</h4>
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="objectName">{{Nom de l'équipement}}</label>
+                                        <label class="col-sm-3 control-label" for="objectName">{{Nom de la surveillance}}</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="eqLogicAttr form-control display-none" data-l1key="id" />
-                                            <input id="objectName" type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}" />
+                                            <input id="objectName" type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de la surveillance}}" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -286,7 +174,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">{{Equipement}}</label>
+                                        <label class="col-sm-3 control-label">{{Surveillance}}</label>
                                         <div class="col-sm-5">
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
