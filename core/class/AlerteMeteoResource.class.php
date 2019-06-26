@@ -86,9 +86,11 @@ class AlerteMeteoResource
         // fermeture de curl
         curl_close($curl);
         // si erreur
-        if (isset($error_msg)) {
-            // TODO - Handle cURL error accordingly
-        } else { }
+        if (!isset($error_msg)) {
+            // TODO - Traitement de l'erreur
+        } else {
+            $response = json_decode($raw, true);
+        }
         return $response;
     }
 
