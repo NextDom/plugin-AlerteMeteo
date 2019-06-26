@@ -70,7 +70,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#forecastObjectList"> {{Prévisions}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#forecastObjectList"> {{Prévisions}}</a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -106,8 +106,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <!-- Vigilances -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#alertObjectList"> {{Vigilances}} </a>
+                    <h4 class="panel-title" data-toggle="collapse" data-parent="#objectList" href="#alertObjectList">
+                        {{Vigilances}}
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -121,7 +121,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </span>
                     </h4>
                 </div>
-                <div id="alertObjectList" class="panel-collapse collapse in">
+                <div id="alertObjectList" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
@@ -144,7 +144,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#hurricaneObjectList"> {{Alertes cycloniques}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#hurricaneObjectList"> {{Alertes cycloniques}}</a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -158,7 +158,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </span>
                     </h4>
                 </div>
-                <div id="hurricaneObjectList" class="panel-collapse collapse in">
+                <div id="hurricaneObjectList" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
