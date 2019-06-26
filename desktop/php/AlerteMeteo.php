@@ -293,5 +293,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
     </div>
 </div>
 <?php
+include_file('desktop', 'AlerteMeteo', 'css', 'AlerteMeteo');
 include_file('desktop', 'AlerteMeteo', 'js', 'AlerteMeteo');
 include_file('core', 'plugin.template', 'js');
