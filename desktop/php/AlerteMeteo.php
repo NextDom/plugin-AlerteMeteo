@@ -65,12 +65,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
             </div>
         </div>
         <br>
-        <!-- Prévisions -->
         <div id="objectList" class="panel-group">
+            <!-- Prévisions -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Prévisions}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#forecastObjectList"> {{Prévisions}} </a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -84,7 +84,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </span>
                     </h4>
                 </div>
-                <div id="externalInfoObjectList" class="panel-collapse collapse in">
+                <div id="forecastObjectList" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
@@ -103,14 +103,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <!-- Vigilances -->
-        <div id="objectList" class="panel-group">
+            <!-- Vigilances -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Alertes}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#alertObjectList"> {{Vigilances}} </a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -124,7 +121,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </span>
                     </h4>
                 </div>
-                <div id="externalInfoObjectList" class="panel-collapse collapse in">
+                <div id="alertObjectList" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
@@ -143,14 +140,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <!-- Cyclones -->
-        <div id="objectList" class="panel-group">
+            <!-- Cyclones -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#externalInfoObjectList"> {{Alertes cycloniques}} </a>
+                        <a data-toggle="collapse" data-parent="#objectList" href="#hurricaneObjectList"> {{Alertes cycloniques}} </a>
                         <span class="badge">
                             <?php
                             $objectNumber = 0;
@@ -164,7 +158,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </span>
                     </h4>
                 </div>
-                <div id="externalInfoObjectList" class="panel-collapse collapse in">
+                <div id="hurricaneObjectList" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
