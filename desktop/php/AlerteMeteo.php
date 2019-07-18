@@ -188,7 +188,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#objectList" href="#alertObjectList">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#undefinedObjectList">
                             {{Non catégorisé}}
                             <span class="badge">
                                 <?php
@@ -204,7 +204,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                         </a>
                     </h4>
                 </div>
-                <div id="alertObjectList" class="panel-collapse collapse">
+                <div id="undefinedObjectList" class="panel-collapse collapse">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
