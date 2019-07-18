@@ -184,6 +184,45 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     </div>
                 </div>
             </div>
+            <!-- Non catégorisé -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#objectList" href="#alertObjectList">
+                            {{Non catégorisé}}
+                            <span class="badge">
+                                <?php
+                                $objectNumber = 0;
+                                foreach ($eqLogics as $eqLogic) {
+                                    if (!in_array($eqLogic->getConfiguration('eqType'), array ('forecast', 'hurricane', 'alert'))) {
+                                        ++$objectNumber;
+                                    }
+                                }
+                                echo $objectNumber;
+                                ?>
+                            </span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="alertObjectList" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="eqLogicThumbnailContainer">
+                            <?php
+                            foreach ($eqLogics as $eqLogic) {
+                                if (!in_array($eqLogic->getConfiguration('eqType'), array ('forecast', 'hurricane', 'alert'))) {
+                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                    echo '<img src="plugins/AleterMeteo/resources/images/undefined.png" height="100" width="100" />';
+                                    echo "<br>";
+                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                    echo '</div>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -226,7 +265,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label" for="objectName">{{Nom de l'alerte}}</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="eqLogicAttr form-control display-none" data-l1key="id" />
                                             <input id="objectName" type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de la surveillance}}" />
                                         </div>
                                     </div>
@@ -256,7 +294,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">{{Alerte}}</label>
+                                        <label class="col-sm-3 control-label">{{État et visibilité}}</label>
                                         <div class="col-sm-5">
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
@@ -268,7 +306,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                         <label class="col-sm-3 control-label" for="eqType">{{Type d'alerte}}</label>
                                         <div class="col-sm-5">
                                             <select id="eqType" class="eqLogicAttr form-control cursor" data-l1key="configuration" data-l2key="eqType">
-                                                <option value="forecast">{{Prévision}}</option>
+                                                <option value="forecast">{{Prévision météorologique}}</option>
                                                 <option value="alert">{{Vigilance}}</option>
                                                 <option value="hurricane">{{Alerte cyclonique}}</option>
                                             </select>
