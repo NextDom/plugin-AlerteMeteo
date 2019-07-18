@@ -56,7 +56,7 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 #### Données sur les vigilances de la Réunion
 
 - URL: `http://www.meteofrance.re/vigilance-reunion/#zone#`
-- Format: HTML à extraire
+- Format: HTML à extraire (h3 : t de vigilance, h4 : période, p : bulletin)
 - Paramètre :
   - `#zone#` : identifiant numérique de la zone allant de 1 à 12 en commençant par les terres intérieurs.
   
@@ -141,6 +141,13 @@ De ce fait, la façon d'extraire les informations pourrait être inexacte et ne 
 - Format de l'image : SVG
 - Paramètre :
   - `#departement#` : code de département (exemple : `DEPT974` pour la Réunion)
+
+#### Vigilances
+
+- La Réunion : `http://www.meteofrance.re/integration/sim-portail/generated/integration/img/vigilance/xfr_97.gif.pagespeed.ic.gyqIuNInpz.webp`
+- Mayotte : `http://www.meteofrance.yt/integration/sim-portail/generated/integration/img/vigilance/xfr_98.gif.pagespeed.ic.nji0XkPMnA.webp`
+- Antilles (Guadeloupe, Guyanne, Martinique) : `http://www.meteofrance.gp/integration/sim-portail/generated/integration/img/vigilance/xfr_99.gif.pagespeed.ic.Dq-sNUvc-B.webp`
+
 
 #### Cyclo-genèse (Outre-Mer)
 
