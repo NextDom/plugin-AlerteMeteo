@@ -99,7 +99,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
             $typesKeys = array_keys($types);
             // Catégorise les élements par type
             foreach ($eqLogics as $eqLogic) {
-                if (in_array($typesKeys, $eqLogic->getConfiguration('eqType'))) {
+                if (in_array($eqLogic->getConfiguration('eqType'), $typesKeys)) {
                     $types[$eqLogic->getConfiguration('eqType')]['eqLogics'][] = $eqLogic;
                 } else {
                     $types['undefined']['eqLogics'][] = $eqLogic;
@@ -225,9 +225,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                         <label class="col-sm-3 control-label" for="eqType">{{Type d'alerte}}</label>
                                         <div class="col-sm-5">
                                             <select id="eqType" class="eqLogicAttr form-control cursor" data-l1key="configuration" data-l2key="eqType">
-                                                <option value="forecast">{{Prévision météorologique}}</option>
-                                                <option value="alert">{{Vigilance}}</option>
-                                                <option value="hurricane">{{Alerte cyclonique}}</option>
+                                                <?php
+                                                foreach ($typesKeys as $type) {
+                                                    echo '<option value="'.$type.'">{{'.$types[$type]['singular'].'}}</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
