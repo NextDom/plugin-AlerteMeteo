@@ -107,7 +107,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
             }
             // Parcours les types d'élements disponibles les affiches par catégorie
             foreach ($types as $type => $data) {
-                debug ($data);
                 if (sizeof($data['eqLogics']) > 0) {
             ?>
             <div class="panel panel-default">
@@ -183,13 +182,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label" for="objectName">{{Nom de l'alerte}}</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
+                                            <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display:none" />
                                             <input id="objectName" type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de la surveillance}}" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label" for="sel_object">{{Objet parent}}</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
                                             <select id="sel_object" class="eqLogicAttr form-control cursor" data-l1key="object_id">
                                                 <option value="">{{Aucun}}</option>
                                                 <?php
@@ -202,7 +202,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">{{Catégorie}}</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-3">
                                             <?php
                                             foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                                                 echo '<label class="checkbox-inline">';
@@ -214,7 +214,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">{{État et visibilité}}</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
                                             <label class="checkbox-inline">
                                                 <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked />{{Activer}}</label>
                                             <label class="checkbox-inline">
@@ -223,7 +223,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label" for="eqType">{{Type d'alerte}}</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
                                             <select id="eqType" class="eqLogicAttr form-control cursor" data-l1key="configuration" data-l2key="eqType">
                                                 <?php
                                                 foreach ($typesKeys as $type) {
@@ -235,7 +235,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label" for="comment">{{Commentaire}}</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
                                             <textarea id="comment" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="commentaire"></textarea>
                                         </div>
                                     </div>
