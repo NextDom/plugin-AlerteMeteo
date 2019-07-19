@@ -77,28 +77,35 @@ $eqLogics = eqLogic::byType($plugin->getId());
             $types = array (
                 'forecast' => array (
                     'singular' => 'Prévision météorologique',
-                    'plural' => 'Prévisions météorologiques'
+                    'plural' => 'Prévisions météorologiques',
+                    'eqLogics' => array()
                 ),
                 'alert' => array (
                     'singular' => 'Vigilance',
-                    'plural' => 'Vigilances'
+                    'plural' => 'Vigilances',
+                    'eqLogic' => array()
                 ),
                 'hurricane' => array (
                     'singular' => 'Alerte cyclonique',
-                    'plural' => 'Alertes cycloniques'
+                    'plural' => 'Alertes cycloniques',
+                    'eqLogic' => array()
+                ),
+                'undefined' => array (
+                    'singular' => 'Inconnu',
+                    'plural' => 'Inconnus',
+                    'eqLogic' => array()
                 )
             );
             $typesKeys = array_keys($types);
             // Catégorise les élements par type
-            $categorized = array();
             foreach ($eqLogics as $eqLogic) {
                 if (in_array($typesKeys, $eqLogic->getConfiguration('eqType'))) {
-                    $categorized[$eqLogic->getConfiguration('eqType')] = $eqLogic;
+                    $types[$eqLogic->getConfiguration('eqType')]['eqLogics'][] = $eqLogic;
                 } else {
-                    $categorized['undefined'] = $eqLogic;
+                    $types['undefined']['eqLogics'][] = $eqLogic;
                 }
             }
-            debug ($categorized);
+            debug ($types);
             // Parcours les types d'élements disponibles les affiches par catégorie
             foreach ($types as $type => $labels) {
             ?>
