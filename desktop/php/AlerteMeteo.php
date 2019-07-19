@@ -105,50 +105,41 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     $types['undefined']['eqLogics'][] = $eqLogic;
                 }
             }
-            debug ($types);
             // Parcours les types d'élements disponibles les affiches par catégorie
-            foreach ($types as $type => $labels) {
+            foreach ($types as $type => $data) {
+                debug ($data);
+                if (sizeof($data['eqLogics']) > 0) {
             ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#objectList" href="#<?php echo $type ?>ObjectList">
-                            {{<?php echo $label['plural'] ?>}}
+                            {{<?php echo $data['plural'] ?>}}
                             <span class="badge">
-                                <?php // compte le nombre d'éléments correspondant aux types
-                                $objectNumber = 0;
-                                foreach ($eqLogics as $eqLogic) {
-                                    if ($eqLogic->getConfiguration('eqType') == $type) {
-                                        ++$objectNumber;
-                                    }
-                                }
-                                echo $objectNumber;
-                                ?>
+                                <?php echo sizeof($data['eqLogics']); ?>
                             </span>
                         </a>
-                        
                     </h4>
                 </div>
                 <div id="<?php echo $type ?>ObjectList" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="eqLogicThumbnailContainer">
                             <?php
-                            foreach ($eqLogics as $eqLogic) {
-                                if ($eqLogic->getConfiguration('eqType') == $type) {
-                                    $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                                    echo '<img src="plugins/AleterMeteo/resources/images/forecast.png" height="100" width="100" />';
-                                    echo "<br>";
-                                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
-                                    echo '</div>';
-                                }
+                            foreach ($data['eqLogics'] as $eqLogic) {
+                                $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                echo '<img src="plugins/AleterMeteo/resources/images/forecast.png" height="100" width="100" />';
+                                echo "<br>";
+                                echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                echo '</div>';
                             }
                             ?>
                         </div>
                     </div>
                 </div>
-            </div>
-            <?php    
+            </div> 
+            <?php
+                }
             }
             ?>
         </div>
