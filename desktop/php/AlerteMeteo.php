@@ -88,13 +88,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     'plural' => 'Alertes cycloniques'
                 )
             );
+            $typesKeys = array_keys($types);
             // Catégorise les élements par type
             $categorized = array();
             foreach ($eqLogics as $eqLogic) {
-                debug ($eqLogic->getConfiguration('eqType'));
-                //$categorized[$eqLogic->getConfiguration('eqType')] = $eqLogic;
+                if (in_array($typesKeys, $eqLogic->getConfiguration('eqType'))) {
+                    $categorized[$eqLogic->getConfiguration('eqType')] = $eqLogic;
+                } else {
+                    $categorized['undefined'] = $eqLogic;
+                }
             }
-            
+            debug ($categorized);
             // Parcours les types d'élements disponibles les affiches par catégorie
             foreach ($types as $type => $labels) {
             ?>
