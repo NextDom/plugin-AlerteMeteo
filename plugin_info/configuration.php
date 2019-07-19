@@ -24,31 +24,3 @@ if (!isConnect()) {
     die();
 }
 ?>
-<form class="form-horizontal">
-  <fieldset>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">
-        {{Ville}}
-      </label>
-      <div class="col-sm-9">
-        <input class="configKey form-control" data-l1key="city" />
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">
-        {{Alerte cyclonique}}
-      </label>
-      <div class="col-sm-9">
-        <input class="configKey form-control" type="checkbox" data-l1key="cyclone" />
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">
-        {{Alerte vigilance}}
-      </label>
-      <div class="col-sm-9">
-        <input class="configKey form-control" type="checkbox" data-l1key="vigilance" />
-      </div>
-    </div>
-  </fieldset>
-</form>
