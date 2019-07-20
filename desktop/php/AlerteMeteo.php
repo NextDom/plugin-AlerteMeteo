@@ -22,9 +22,10 @@ if (!isConnect('admin')) {
 }
 
 // TODO - A enlever avant production
-function debug ($data) {
+function debug($data)
+{
     echo '<pre>';
-    print_r ($data);
+    print_r($data);
     echo '</pre>';
 }
 
@@ -72,25 +73,25 @@ $eqLogics = eqLogic::byType($plugin->getId());
         </div>
         <br>
         <div id="objectList" class="panel-group">
-            <?php 
+            <?php
             // Types disponibles
-            $types = array (
-                'forecast' => array (
+            $types = array(
+                'forecast' => array(
                     'singular' => 'Prévision météorologique',
                     'plural' => 'Prévisions météorologiques',
                     'eqLogics' => array()
                 ),
-                'alert' => array (
+                'alert' => array(
                     'singular' => 'Vigilance',
                     'plural' => 'Vigilances',
                     'eqLogic' => array()
                 ),
-                'hurricane' => array (
+                'hurricane' => array(
                     'singular' => 'Alerte cyclonique',
                     'plural' => 'Alertes cycloniques',
                     'eqLogic' => array()
                 ),
-                'undefined' => array (
+                'undefined' => array(
                     'singular' => 'Non configuré',
                     'plural' => 'Non configurés',
                     'eqLogic' => array()
@@ -105,39 +106,47 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     $types['undefined']['eqLogics'][] = $eqLogic;
                 }
             }
-            // Parcours les types d'élements disponibles les affiches par catégorie
-            foreach ($types as $type => $data) {
-                if (sizeof($data['eqLogics']) > 0) {
             ?>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        {{<?php echo $data['plural'] ?>}}
-                        <span class="badge">
-                            <?php echo sizeof($data['eqLogics']); ?>
-                        </span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <div class="eqLogicThumbnailContainer">
-                        <?php
-                        // Parcours les élements du type et les affiche
-                        foreach ($data['eqLogics'] as $eqLogic) {
-                            $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
-                            echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                            echo '<img src="plugins/AlerteMeteo/resources/images/'.$type.'.png" height="100" width="100" />';
-                            echo "<br>";
-                            echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
-                            echo '</div>';
-                        }
+            <div id="objectList" class="panel-group">
+                <?php
+                // Parcours les types d'élements disponibles les affiches par catégorie
+                foreach ($types as $type => $data) {
+                    if (sizeof($data['eqLogics']) > 0) {
                         ?>
-                    </div>
-                </div>
-            </div> 
-            <?php
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#objectList" href="#<?php echo $type ?>ObjectList">
+                                        {{<?php echo $data['plural'] ?>}}
+                                        <span class="badge">
+                                            <?php echo sizeof($data['eqLogics']) ?>
+                                        </span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="<?php echo $type ?>ObjectList" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="eqLogicThumbnailContainer">
+                                        <?php
+                                        // Parcours les élements du type et les affiche
+                                        foreach ($data['eqLogics'] as $eqLogic) {
+                                            $opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+                                            echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+                                            echo '<img src="plugins/AlerteMeteo/resources/images/' . $type . '.png" height="100" width="100" />';
+                                            echo "<br>";
+                                            echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
+                                            echo '</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
                 }
-            }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -225,7 +234,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                                 <?php
                                                 foreach ($typesKeys as $type) {
                                                     if ($type != 'undefined') {
-                                                        echo '<option value="'.$type.'">{{'.$types[$type]['singular'].'}}</option>';
+                                                        echo '<option value="' . $type . '">{{' . $types[$type]['singular'] . '}}</option>';
                                                     }
                                                 }
                                                 ?>
